@@ -14,7 +14,7 @@ allprojects {
 #### Step 2. Add the dependency
 ```
 dependencies {
-  compile 'com.github.bikcrum:FaceDetectionCrop-Android:1.0'
+  compile 'com.github.bikcrum:FaceDetectionCrop-Android:1.0.0'
 }
 ```
 
