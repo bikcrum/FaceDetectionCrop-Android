@@ -14,7 +14,7 @@ allprojects {
 #### Step 2. Add the dependency
 ```
 dependencies {
-  compile 'com.github.bikcrum:FaceDetectionCrop-Android:1.0.0'
+  compile 'com.github.bikcrum:FaceDetectionCrop-Android:1.0.1'
 }
 ```
 
@@ -28,18 +28,15 @@ FaceDetectionCropfaceDetectionCrop = FaceDetectionCrop.initialize(MainActivity.t
 Bitmap bitmap = faceDetectionCrop.getDetectionGuideLines();
 ```
 
-#### Step 5. Get guidelines showing face regions, frames and area to crop in square form
+#### Step 5. See how guideline bitmap looks by loading it in imageview
 ```
-Bitmap bitmap = faceDetectionCrop.getDetectionGuideLines();
-
-// see how guideline bitmap looks by loading it in imageview
 imageView.setImageDrawable(new BitmapDrawable(getResources(), bitmap));
 ```
-#### Step 6: Get cropped bitmap in square form containing face
+#### Step 6: And get cropped bitmap in square form containing face
 ```
 Bitmap bitmap = faceDetectionCrop.getFaceCroppedBitmap();
 
-// see how cropped image looks by loading it in imageview
+// load it in imageview
 imageView.setImageDrawable(new BitmapDrawable(getResources(), bitmap));
 ```
 
