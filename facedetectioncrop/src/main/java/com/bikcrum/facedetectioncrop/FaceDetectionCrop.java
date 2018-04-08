@@ -17,16 +17,19 @@
 package com.bikcrum.facedetectioncrop;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.os.AsyncTask;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.math.MathUtils;
 import android.util.Log;
 import android.util.SparseArray;
+import android.util.TypedValue;
 
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
@@ -38,6 +41,8 @@ public class FaceDetectionCrop {
     private SparseArray<Face> faces;
     private RectF boundary;
     private RectF cropArea;
+
+
 
     /**
      * Constructor to initialize facedetector
@@ -75,6 +80,9 @@ public class FaceDetectionCrop {
 
         //detect all faces in the frame
         faces = faceDetector.detect(frame);
+
+        //release facedetector
+        faceDetector.release();
 
         //init boundary that will cover all faces in it
         boundary = new RectF();
@@ -192,17 +200,20 @@ public class FaceDetectionCrop {
         //create copy of bitmap so changes will not reflect original bitmap
         Bitmap bitmap1 = Bitmap.createBitmap(bitmap);
 
+        //create canvas
+        Canvas c = new Canvas(bitmap1);
+
         //create paint object
         Paint p = new Paint();
         p.setStyle(Paint.Style.STROKE);
         p.setAntiAlias(true);
-        p.setStrokeWidth(5);
         p.setFilterBitmap(true);
         p.setDither(true);
-        p.setColor(Color.BLUE);
 
-        //create canvas
-        Canvas c = new Canvas(bitmap1);
+
+        //draw blue rectangle that contain each face
+        p.setColor(Color.BLUE);
+        p.setStrokeWidth(dpTopx(8));
 
         //for each face do following
         for (int i = 0; i < faces.size(); i++) {
@@ -217,12 +228,14 @@ public class FaceDetectionCrop {
             c.drawRect(x1, y1, x2, y2, p);
         }
 
-        p.setColor(Color.RED);
         //draw red rectangle that contain all faces
+        p.setColor(Color.RED);
+        p.setStrokeWidth(dpTopx(6));
         c.drawRect(boundary.left, boundary.top, boundary.right, boundary.bottom, p);
 
-        p.setColor(Color.GREEN);
         //draw green rectangle that is maximum square rectangle containing all faces
+        p.setStrokeWidth(dpTopx(6));
+        p.setColor(Color.GREEN);
         c.drawRect(cropArea.left, cropArea.top, cropArea.right, cropArea.bottom, p);
 
         //return result bitmap
@@ -247,5 +260,10 @@ public class FaceDetectionCrop {
                 (int) (cropArea.width()),
                 (int) (cropArea.height())
         );
+    }
+
+    private float dpTopx(int dp) {
+        Resources r = context.getResources();
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics());
     }
 }
