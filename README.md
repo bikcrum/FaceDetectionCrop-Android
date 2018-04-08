@@ -14,7 +14,7 @@ allprojects {
 #### Step 2. Add the dependency
 ```
 dependencies {
-  compile 'com.github.bikcrum:FaceDetectionCrop-Android:1.0.1'
+  compile 'com.github.bikcrum:FaceDetectionCrop-Android:1.0.2'
 }
 ```
 
@@ -32,6 +32,7 @@ Bitmap bitmap = faceDetectionCrop.getDetectionGuideLines();
 ```
 imageView.setImageDrawable(new BitmapDrawable(getResources(), bitmap));
 ```
+
 #### Step 6: And get cropped bitmap in square form containing face
 ```
 Bitmap bitmap = faceDetectionCrop.getFaceCroppedBitmap();
@@ -40,4 +41,4 @@ Bitmap bitmap = faceDetectionCrop.getFaceCroppedBitmap();
 imageView.setImageDrawable(new BitmapDrawable(getResources(), bitmap));
 ```
 
-
+### Note: If you get out of memory exception, add android:largeHeap="true" in <application> tag
