@@ -110,6 +110,13 @@ public class MainActivity extends AppCompatActivity {
             //once image is loaded stop progress and show ability to crop
             findViewById(R.id.cropImageBtn).setVisibility(View.VISIBLE);
             progress.setVisibility(View.GONE);
+
+            //get number of faces in bitmap
+            Toast.makeText(MainActivity.this,
+                    "Has face(s):" + faceDetectionCrop.hasFace() + "\n" + "Number of face(s):" + faceDetectionCrop.getFaceCount(),
+                    Toast.LENGTH_SHORT)
+                    .show();
+            
             super.onPostExecute(aVoid);
         }
     }

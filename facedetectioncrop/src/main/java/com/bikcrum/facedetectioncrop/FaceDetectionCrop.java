@@ -167,7 +167,7 @@ public class FaceDetectionCrop {
      *
      * @return true or false
      */
-    private boolean hasFace() {
+    public boolean hasFace() {
         if (faces == null) {
             throw new RuntimeException("Initialize FaceDetectionCrop using FaceDetectionCrop.initialize() before using it.");
         }
@@ -179,7 +179,7 @@ public class FaceDetectionCrop {
      *
      * @return count
      */
-    private int getFaceCount() {
+    public int getFaceCount() {
         if (faces == null) {
             throw new RuntimeException("Initialize FaceDetectionCrop using FaceDetectionCrop.initialize() before using it.");
         }
